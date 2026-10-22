@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<defs>
+ <linearGradient id="ped" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#fff3c0"/><stop offset=".42" stop-color="#e8c56a"/>
+  <stop offset="1" stop-color="#8f6612"/>
+ </linearGradient>
+ <linearGradient id="glass" x1=".15" y1="0" x2=".85" y2="1">
+  <stop offset="0" stop-color="#ffffff" stop-opacity=".97"/>
+  <stop offset=".26" stop-color="#dcf6ff" stop-opacity=".94"/>
+  <stop offset=".55" stop-color="#a4dff7" stop-opacity=".9"/>
+  <stop offset="1" stop-color="#5aa9d6" stop-opacity=".92"/>
+ </linearGradient>
+ <linearGradient id="glass2" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#f0fcff" stop-opacity=".9"/>
+  <stop offset="1" stop-color="#79c2e7" stop-opacity=".85"/>
+ </linearGradient>
+ <radialGradient id="glow" cx=".5" cy=".4" r=".62">
+  <stop offset="0" stop-color="#bdf0ff" stop-opacity=".5"/>
+  <stop offset="1" stop-color="#bdf0ff" stop-opacity="0"/>
+ </radialGradient>
+ <filter id="sh" x="-35%" y="-35%" width="180%" height="180%">
+  <feDropShadow dx="0" dy="2.4" stdDeviation="2" flood-color="#06101c" flood-opacity=".62"/>
+ </filter>
+</defs>
+<ellipse cx="60" cy="58" rx="54" ry="50" fill="url(#glow)"/>
+<g filter="url(#sh)">
+ <!-- постамент -->
+ <rect x="27" y="104" width="66" height="10" rx="5" fill="url(#ped)" stroke="#7d5a0e" stroke-width="1.7"/>
+ <path d="M34 93 h52 l-5 11 h-42 z" fill="url(#ped)" stroke="#7d5a0e" stroke-width="1.7" stroke-linejoin="round"/>
+ <path d="M39 95 h42" stroke="#fff8dd" stroke-width="1.5" opacity=".5"/>
+ <!-- манжета -->
+ <path d="M38 93 L39 82 h42 l1 11 z" fill="url(#glass2)" stroke="#4f9dc9" stroke-width="1.7" stroke-linejoin="round"/>
+ <path d="M41 89 h38" stroke="#ffffff" stroke-width="1.4" opacity=".55"/>
+ <!-- пальцы -->
+ <rect x="40" y="33" width="8" height="36" rx="4.0" fill="url(#glass)" stroke="#4f9dc9" stroke-width="1.7"/>
+<path d="M42.4 39 L42.4 61" stroke="#ffffff" stroke-width="1.7" opacity=".8" stroke-linecap="round"/>
+<circle cx="45.4" cy="40" r="1.15" fill="#ffffff" opacity=".85"/>
+<rect x="50" y="28" width="8" height="41" rx="4.0" fill="url(#glass)" stroke="#4f9dc9" stroke-width="1.7"/>
+<path d="M52.4 34 L52.4 61" stroke="#ffffff" stroke-width="1.7" opacity=".8" stroke-linecap="round"/>
+<circle cx="55.4" cy="35" r="1.15" fill="#ffffff" opacity=".85"/>
+<rect x="60" y="31" width="8" height="38" rx="4.0" fill="url(#glass)" stroke="#4f9dc9" stroke-width="1.7"/>
+<path d="M62.4 37 L62.4 61" stroke="#ffffff" stroke-width="1.7" opacity=".8" stroke-linecap="round"/>
+<circle cx="65.4" cy="38" r="1.15" fill="#ffffff" opacity=".85"/>
+<rect x="70" y="38" width="7" height="31" rx="3.5" fill="url(#glass)" stroke="#4f9dc9" stroke-width="1.7"/>
+<path d="M72.4 44 L72.4 61" stroke="#ffffff" stroke-width="1.7" opacity=".8" stroke-linecap="round"/>
+<circle cx="74.4" cy="45" r="1.15" fill="#ffffff" opacity=".85"/>
+
+ <!-- ладонь -->
+ <rect x="37.5" y="56" width="42" height="27" rx="7" fill="url(#glass)" stroke="#4f9dc9" stroke-width="1.8"/>
+ <path d="M46 60 L46 82 M60 60 L60 82 M74 60 L74 82" stroke="#ffffff" stroke-width="1.2" opacity=".45"/>
+ <path d="M43 62 C43 59 46 58 48 59" stroke="#ffffff" stroke-width="2.4" fill="none" opacity=".85" stroke-linecap="round"/>
+ <!-- большой палец -->
+ <path d="M40 62 C33 62 28 58 27.5 52.5 C27 47.5 31.5 44.6 35.4 47.2 C39 49.7 40.6 56 40.6 60 Z"
+       fill="url(#glass2)" stroke="#4f9dc9" stroke-width="1.6" stroke-linejoin="round"/>
+ <path d="M31 51 C31.6 54 33.6 57 36.4 59" stroke="#ffffff" stroke-width="1.6" fill="none" opacity=".8" stroke-linecap="round"/>
+ <!-- искры -->
+ <g fill="#eafcff">
+  <path d="M88 38 l1.9 4.6 4.6 1.9 -4.6 1.9 -1.9 4.6 -1.9 -4.6 -4.6 -1.9 4.6 -1.9 z" opacity=".95"/>
+  <path d="M29 70 l1.4 3.3 3.3 1.4 -3.3 1.4 -1.4 3.3 -1.4 -3.3 -3.3 -1.4 3.3 -1.4 z" opacity=".8"/>
+  <path d="M84 70 l1.1 2.6 2.6 1.1 -2.6 1.1 -1.1 2.6 -1.1 -2.6 -2.6 -1.1 2.6 -1.1 z" opacity=".7"/>
+ </g>
+</g>
+</svg>

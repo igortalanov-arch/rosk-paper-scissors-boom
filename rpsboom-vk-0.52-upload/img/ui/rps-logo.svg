@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+<defs>
+ <linearGradient id="lgGr" x1=".2" y1="0" x2=".85" y2="1">
+  <stop offset="0" stop-color="#a6f7cd"/><stop offset=".42" stop-color="#3ddc84"/><stop offset="1" stop-color="#127a42"/>
+ </linearGradient>
+ <linearGradient id="lgAu" x1=".15" y1="0" x2=".85" y2="1">
+  <stop offset="0" stop-color="#fff8dc"/><stop offset=".4" stop-color="#f2d276"/><stop offset="1" stop-color="#a97c18"/>
+ </linearGradient>
+ <linearGradient id="lgCuff" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#fffdf0"/><stop offset="1" stop-color="#cbb887"/>
+ </linearGradient>
+ <marker id="ah" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="11" markerHeight="11"
+         markerUnits="userSpaceOnUse" orient="auto-start-reverse">
+  <path d="M0.8 0.4 L9.6 5 L0.8 9.6 Z" fill="#f2d276"/>
+ </marker>
+ <filter id="lsh" x="-30%" y="-30%" width="170%" height="170%">
+  <feDropShadow dx="0" dy="1.4" stdDeviation="1.3" flood-color="#050912" flood-opacity=".6"/>
+ </filter>
+</defs>
+
+<g filter="url(#lsh)">
+ <!-- цикл: две золотые стрелки (верхняя — по часовой, нижняя — против) -->
+ <path d="M8.2 44.5 A40 40 0 0 1 87.8 44.5" fill="none" stroke="url(#lgAu)" stroke-width="4" stroke-linecap="round" marker-end="url(#ah)"/>
+ <path d="M87.8 51.5 A40 40 0 0 1 8.2 51.5" fill="none" stroke="url(#lgAu)" stroke-width="4" stroke-linecap="round" marker-end="url(#ah)"/>
+
+ <!-- ножницы (зелёные), верх-лево -->
+ <g transform="translate(15,14) rotate(10) scale(1.15)" stroke="#0d5f36" stroke-width="1.3" stroke-linejoin="round">
+  <rect x="1" y="12.5" width="17" height="14.5" rx="6" fill="url(#lgGr)"/>
+  <rect x="7.5" y="14.6" width="16" height="5.4" rx="2.7" fill="url(#lgGr)" transform="rotate(-40 8.5 17.3)"/>
+  <rect x="7.5" y="17.4" width="14.5" height="5.4" rx="2.7" fill="url(#lgGr)" transform="rotate(3 8.5 20.1)"/>
+  <rect x="0" y="19.5" width="5.5" height="7.6" rx="2.6" fill="url(#lgGr)"/>
+  <rect x="1" y="25.4" width="17" height="6.2" rx="2.6" fill="url(#lgCuff)" stroke="#8a7742" stroke-width="1.1"/>
+ </g>
+
+ <!-- бумага (золотая), верх-право -->
+ <g transform="translate(56,13) rotate(-8) scale(1.15)" stroke="#6d4c07" stroke-width="1.3" stroke-linejoin="round">
+  <rect x="0.5" y="11" width="17.5" height="15" rx="5.5" fill="url(#lgAu)"/>
+  <rect x="1.4" y="3.6" width="3.9" height="9.4" rx="1.95" fill="url(#lgAu)"/>
+  <rect x="6" y="1.4" width="3.9" height="11.6" rx="1.95" fill="url(#lgAu)"/>
+  <rect x="10.6" y="2.6" width="3.9" height="10.4" rx="1.95" fill="url(#lgAu)"/>
+  <rect x="15" y="4.6" width="3.9" height="8.4" rx="1.95" fill="url(#lgAu)"/>
+  <rect x="-2.6" y="16.6" width="5.6" height="7.2" rx="2.6" fill="url(#lgAu)"/>
+  <rect x="0.5" y="23.4" width="17.5" height="6" rx="2.6" fill="url(#lgCuff)" stroke="#8a7742" stroke-width="1.1"/>
+ </g>
+
+ <!-- кулак (зелёный), низ -->
+ <g transform="translate(34,50) rotate(4) scale(1.15)" stroke="#0d5f36" stroke-width="1.3" stroke-linejoin="round">
+  <rect x="1" y="10.5" width="23" height="16" rx="7" fill="url(#lgGr)"/>
+  <rect x="2.4" y="4" width="5.2" height="8.8" rx="2.6" fill="url(#lgGr)"/>
+  <rect x="8.6" y="2.2" width="5.2" height="10.6" rx="2.6" fill="url(#lgGr)"/>
+  <rect x="14.8" y="3.4" width="5.2" height="9.4" rx="2.6" fill="url(#lgGr)"/>
+  <rect x="20.6" y="11" width="6" height="7" rx="2.9" fill="url(#lgGr)"/>
+  <rect x="1" y="23.2" width="23" height="6.4" rx="2.8" fill="url(#lgCuff)" stroke="#8a7742" stroke-width="1.1"/>
+ </g>
+</g>
+</svg>

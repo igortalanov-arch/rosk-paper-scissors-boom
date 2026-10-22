@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+<defs>
+ <linearGradient id="au" x1=".2" y1="0" x2=".8" y2="1">
+  <stop offset="0" stop-color="#fff6d2"/><stop offset=".38" stop-color="#f2d276"/>
+  <stop offset=".72" stop-color="#dcae3c"/><stop offset="1" stop-color="#a97c18"/>
+ </linearGradient>
+ <linearGradient id="au2" x1="0" y1="0" x2=".6" y2="1">
+  <stop offset="0" stop-color="#ffeeb8"/><stop offset="1" stop-color="#c1901f"/>
+ </linearGradient>
+ <linearGradient id="gr" x1=".2" y1="0" x2=".8" y2="1">
+  <stop offset="0" stop-color="#8ff0b8"/><stop offset=".5" stop-color="#3ddc84"/>
+  <stop offset="1" stop-color="#1d9a56"/>
+ </linearGradient>
+ <filter id="sh" x="-35%" y="-35%" width="180%" height="180%">
+  <feDropShadow dx="0" dy="2" stdDeviation="1.6" flood-color="#0a0d16" flood-opacity=".55"/>
+ </filter>
+</defs>
+<g filter="url(#sh)">
+ <!-- чаша -->
+ <path d="M30 20 H66 V40 C66 52 58 60 48 60 C38 60 30 52 30 40 Z" fill="url(#au)" stroke="#6d4c07" stroke-width="2.6" stroke-linejoin="round"/>
+ <!-- блик -->
+ <path d="M37 26 C35 33 36 42 41 48" stroke="#fffce9" stroke-width="3" opacity=".65" fill="none" stroke-linecap="round"/>
+ <!-- ручки -->
+ <path d="M30 24 H22 C17 24 15 29 15 34 C15 41 21 46 29 46" fill="none" stroke="#c1901f" stroke-width="3.2" stroke-linecap="round"/>
+ <path d="M66 24 H74 C79 24 81 29 81 34 C81 41 75 46 67 46" fill="none" stroke="#c1901f" stroke-width="3.2" stroke-linecap="round"/>
+ <!-- ножка и основание -->
+ <path d="M48 60 V70" stroke="#a97c18" stroke-width="5" stroke-linecap="round"/>
+ <path d="M34 82 H62 C62 76 56 72 48 72 C40 72 34 76 34 82 Z" fill="url(#au2)" stroke="#6d4c07" stroke-width="2.4" stroke-linejoin="round"/>
+ <!-- зелёная звезда-перчатка (цвет алхимика) -->
+ <path d="M48 30 L51.2 37 L58.5 37.9 L53.1 42.9 L54.6 50.2 L48 46.5 L41.4 50.2 L42.9 42.9 L37.5 37.9 L44.8 37 Z" fill="url(#gr)" stroke="#0e6a3b" stroke-width="1.6" stroke-linejoin="round"/>
+</g>
+</svg>

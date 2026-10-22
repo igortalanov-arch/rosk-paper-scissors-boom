@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+<defs>
+ <linearGradient id="au" x1=".2" y1="0" x2=".8" y2="1">
+  <stop offset="0" stop-color="#fff6d2"/><stop offset=".38" stop-color="#f2d276"/>
+  <stop offset=".72" stop-color="#dcae3c"/><stop offset="1" stop-color="#a97c18"/>
+ </linearGradient>
+ <linearGradient id="au2" x1="0" y1="0" x2=".6" y2="1">
+  <stop offset="0" stop-color="#ffeeb8"/><stop offset="1" stop-color="#c1901f"/>
+ </linearGradient>
+ <linearGradient id="gr" x1=".2" y1="0" x2=".8" y2="1">
+  <stop offset="0" stop-color="#8ff0b8"/><stop offset=".5" stop-color="#3ddc84"/>
+  <stop offset="1" stop-color="#1d9a56"/>
+ </linearGradient>
+ <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#fffdf2"/><stop offset="1" stop-color="#e6dcc0"/>
+ </linearGradient>
+ <radialGradient id="throat" cx=".5" cy=".35" r=".75">
+  <stop offset="0" stop-color="#5a2b2b"/><stop offset=".55" stop-color="#33161a"/>
+  <stop offset="1" stop-color="#1a0c10"/>
+ </radialGradient>
+ <filter id="sh" x="-35%" y="-35%" width="180%" height="180%">
+  <feDropShadow dx="0" dy="2" stdDeviation="1.6" flood-color="#0a0d16" flood-opacity=".55"/>
+ </filter>
+</defs>
+<g filter="url(#sh)">
+ <g>
+  <path d="M48 22 L85 37 L48 52 L11 37 Z" fill="url(#au)" stroke="#6d4c07" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M48 22 L85 37 L48 52 Z" fill="#c1901f" opacity=".3"/>
+  <path d="M27 45 L27 61 C27 61 35 71 48 71 C61 71 69 61 69 61 L69 45 L48 54 Z" fill="url(#au2)" stroke="#6d4c07" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M31 51 L31 60" stroke="#fffce9" stroke-width="2" opacity=".55" stroke-linecap="round"/>
+  <circle cx="48" cy="37" r="3.6" fill="#3a2a06"/>
+  <path d="M48 39 C50 46 57 47 57 54 C57 60 51 62 49.6 57" stroke="#0e6a3b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M49.6 57 L45 63 M49.6 57 L49.6 64 M49.6 57 L53.6 63" stroke="#3ddc84" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M23 41 L35 46" stroke="#fffce9" stroke-width="2.2" opacity=".6" stroke-linecap="round"/>
+ </g>
+</g>
+</svg>

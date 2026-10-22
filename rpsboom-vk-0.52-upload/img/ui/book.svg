@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
+<defs>
+ <linearGradient id="au" x1=".2" y1="0" x2=".8" y2="1">
+  <stop offset="0" stop-color="#fff6d2"/><stop offset=".38" stop-color="#f2d276"/>
+  <stop offset=".72" stop-color="#dcae3c"/><stop offset="1" stop-color="#a97c18"/>
+ </linearGradient>
+ <linearGradient id="au2" x1="0" y1="0" x2=".6" y2="1">
+  <stop offset="0" stop-color="#ffeeb8"/><stop offset="1" stop-color="#c1901f"/>
+ </linearGradient>
+ <linearGradient id="gr" x1=".2" y1="0" x2=".8" y2="1">
+  <stop offset="0" stop-color="#8ff0b8"/><stop offset=".5" stop-color="#3ddc84"/>
+  <stop offset="1" stop-color="#1d9a56"/>
+ </linearGradient>
+ <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#fffdf2"/><stop offset="1" stop-color="#e6dcc0"/>
+ </linearGradient>
+ <filter id="sh" x="-35%" y="-35%" width="180%" height="180%">
+  <feDropShadow dx="0" dy="2" stdDeviation="1.6" flood-color="#0a0d16" flood-opacity=".55"/>
+ </filter>
+ 
+</defs>
+<g filter="url(#sh)">
+ <g>
+  <path d="M48 22 C40 16 30 14 18 15 L18 74 C30 73 40 75 48 81 Z" fill="url(#paper)" stroke="#6d4c07" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M48 22 C56 16 66 14 78 15 L78 74 C66 73 56 75 48 81 Z" fill="url(#paper)" stroke="#6d4c07" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M48 22 L48 81" stroke="#8a6a1e" stroke-width="2.6" stroke-linecap="round"/>
+  <g stroke="#b9a77e" stroke-width="1.8" stroke-linecap="round">
+   <path d="M25 27 h17"/><path d="M25 34 h17"/><path d="M25 41 h13"/>
+   <path d="M54 27 h17"/><path d="M54 34 h17"/><path d="M54 41 h13"/>
+  </g>
+  <path d="M18 15 C30 14 40 16 48 22 C56 16 66 14 78 15" stroke="url(#au)" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+  <path d="M30 34 h10" stroke="#e2c37a" stroke-width="1.6" stroke-linecap="round" opacity=".9"/>
+ </g>
+</g>
+</svg>

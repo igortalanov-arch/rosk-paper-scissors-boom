@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<link rel="icon" type="image/png" href="img/ui/favicon-32.png"/>
+<link rel="apple-touch-icon" href="img/ui/icon-192.png"/>
+<link rel="manifest" href="manifest.webmanifest"/>
+<meta name="theme-color" content="#0b1020"/>
+<meta name="description" content="Камень-Ножницы-Бум! Алхимик против Джина — шахматы на перчатках: камень, ножницы, бумага, башни, БУМ и хрустальная перчатка."/>
+<meta property="og:title" content="Камень-Ножницы-Бум! Алхимик против Джина"/>
+<meta property="og:description" content="Шахматы на перчатках: камень, ножницы, бумага, башни, БУМ и хрустальная перчатка."/>
+<meta property="og:image" content="img/ui/icon-512.png"/>
+<meta property="og:type" content="website"/>
+<title>Камень-Ножницы-Бум! Алхимик против Джина · v0.52</title>
+<link rel="stylesheet" href="css/game.css"/>
+</head>
+<body>
+<canvas id="gl"></canvas>
+<div class="top" id="topbar">
+ <div class="grp left-grp">
+  <button id="btn-back" class="ico-btn" title="Назад" aria-label="Назад"><img class="ico" id="ico-back" alt=""></button>
+  
+ </div>
+ <div id="turn-pill" class="turn-pill" aria-live="polite">
+  <span id="turn-dot" class="turn-dot"></span>
+  <span id="turnbadge">Ваш ход</span>
+ </div>
+ <div class="grp right-grp">
+  <button id="btn-cam-sheet" class="ico-btn" title="Камера" aria-label="Камера">📷</button>
+  <button id="btn-mm" class="ico-btn" title="Мини-карта" aria-label="Мини-карта"><img class="ico" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20x%3D%225%22%20y%3D%228%22%20width%3D%2216%22%20height%3D%2213%22%20rx%3D%222.5%22%20fill%3D%22none%22%20stroke%3D%22%23e9e4d6%22%20stroke-width%3D%222.6%22%2F%3E%3Crect%20x%3D%2227%22%20y%3D%228%22%20width%3D%2216%22%20height%3D%2213%22%20rx%3D%222.5%22%20fill%3D%22none%22%20stroke%3D%22%23e9e4d6%22%20stroke-width%3D%222.6%22%2F%3E%3Crect%20x%3D%225%22%20y%3D%2227%22%20width%3D%2216%22%20height%3D%2213%22%20rx%3D%222.5%22%20fill%3D%22none%22%20stroke%3D%22%23e9e4d6%22%20stroke-width%3D%222.6%22%2F%3E%3Crect%20x%3D%2227%22%20y%3D%2227%22%20width%3D%2216%22%20height%3D%2213%22%20rx%3D%222.5%22%20fill%3D%22%233ddc84%22%20stroke%3D%22%233ddc84%22%20stroke-width%3D%222.6%22%2F%3E%3C%2Fsvg%3E" alt=""></button>
+  <button id="btn-snd" class="ico-btn" aria-label="Звук"><img class="ico" id="ico-snd" alt=""><span class="mute-slash"></span></button>
+  <button id="btn-set-top" class="ico-btn" title="Настройки" aria-label="Настройки"><img class="ico" id="ico-set" src="img/ui/gear.svg" alt=""></button>
+  <button id="btn-lang" class="ico-btn" aria-label="Язык"><img class="ico" id="ico-lang" alt=""><span id="lang-lbl">RU</span></button>
+  <button id="btn-theme" class="ico-btn" aria-label="Тема"><img class="ico" id="ico-theme" alt=""></button>
+  <div id="cam-sheet" class="cam-sheet">
+   <button type="button" id="cam-sheet-top">⬒ <span data-i="cam_top">Вид сверху</span></button>
+   <button type="button" id="cam-sheet-reset">🎯 <span data-i="cam_reset">Сброс камеры</span></button>
+  </div>
+ </div>
+</div>
+
+<div id="level-banner" class="level-banner" aria-live="polite" style="display:none"><b id="level-banner-title"></b><span id="level-banner-sub"></span></div>
+<div class="hud" id="hud" style="display:none">
+ <div class="tower-card tower-card--you" id="hud-tower-p">
+  <div class="tw-lbl" data-i="hudTowerP">ВАША БАШНЯ</div>
+  <div class="tw-row">
+   <button type="button" class="tw-type-btn" id="twp-type-btn" aria-label="Легенда типов башен"><span id="twp-type">🪨</span></button>
+   <div class="tw-mid">
+    <span class="tw-cd-txt" id="twp-cd">Смена типа башни через 6 ходов</span>
+    <span class="tw-nx" id="twp-nx"></span>
+   </div>
+  </div>
+  <div class="tw-pop" id="twp-pop"></div>
+ </div>
+ <div class="hud-score-card" aria-live="polite">
+  <button type="button" class="hud-ava you" id="hud-ava-you" aria-label="Захвачено вами: 0"><img id="hud-ava-p-img" alt=""><b class="ava-num" id="hud-ava-p-count">0</b></button>
+  <div class="sc-mid">
+   <span class="sc-cap-lbl" data-i="pieces_left">Осталось перчаток</span>
+   <span class="sc-line">
+    <span class="sc-lbl" data-i="you">Вы</span><b class="sc-val you" id="ppieces">0</b>
+    <span class="sc-sep">—</span>
+    <b class="sc-val ai" id="apieces">0</b><span class="sc-lbl" data-i="genie">Джинн</span>
+   </span>
+  </div>
+  <button type="button" class="hud-ava ai" id="hud-ava-ai" aria-label="Захватил Джинн: 0"><img id="hud-ava-a-img" alt=""><b class="ava-num" id="hud-ava-a-count">0</b></button>
+ </div>
+ <div class="tower-card tower-card--genie" id="hud-tower">
+  <div class="tw-lbl" data-i="hudTower">БАШНЯ ДЖИННА</div>
+  <div class="tw-row">
+   <button type="button" class="tw-type-btn" id="tw-type-btn" aria-label="Легенда типов башен"><span id="tw-type">🪨</span></button>
+   <div class="tw-mid">
+    <span class="tw-cd-txt" id="tw-cd">Смена типа башни через 6 ходов</span>
+    <span class="tw-nx" id="tw-nx"></span>
+   </div>
+  </div>
+  <div class="tw-pop" id="tw-pop"></div>
+ </div>
+ <!-- Hidden compatibility nodes -->
+ <div id="statue" style="display:none"></div>
+ <div id="score" style="display:none">0</div>
+ <div id="moves" style="display:none">1</div>
+ <div id="mode-name-hud" style="display:none">3D</div>
+</div>
+<div id="tower-legend" class="v032-legend" role="dialog" aria-label="Легенда типов" style="display:none">
+ <div class="lg-title" data-i="legend_title">Типы башен</div>
+ <div class="lg-row"><span class="lg-ico" id="lg-ico-r1">🪨</span><span>→</span><span class="lg-ico" id="lg-ico-s1">✂️</span><span data-i="legend_rock">Камень бьёт Ножницы</span></div>
+ <div class="lg-row"><span class="lg-ico" id="lg-ico-s2">✂️</span><span>→</span><span class="lg-ico" id="lg-ico-p1">📄</span><span data-i="legend_scissors">Ножницы бьют Бумагу</span></div>
+ <div class="lg-row"><span class="lg-ico" id="lg-ico-p2">📄</span><span>→</span><span class="lg-ico" id="lg-ico-r2">🪨</span><span data-i="legend_paper">Бумага бьёт Камень</span></div>
+ <div class="lg-next" id="lg-next">Следующий: 🪨 через 3</div>
+ <button type="button" id="tower-legend-close" class="primary" data-i="ok">Понятно</button>
+</div>
+
+<div id="dock" class="dock">
+ <div class="draw-bar" id="hud-draw" aria-label="До ничьей: 20 ходов без боя" title="До ничьей: 20 ходов без боя">
+  <div class="draw-top">
+   <span class="draw-lbl" data-i="draw_to_draw">До ничьей</span>
+   <b id="draw-left">20</b>
+   <span class="draw-suffix" data-i="draw_moves_no_battle">ходов без боя</span>
+  </div>
+  <div class="draw-track"><i id="draw-bar-fill"></i></div>
+  <div class="draw-tip" id="draw-tip" data-i="draw_tip">Если 20 полуходов пройдут без боя — ничья</div>
+ </div>
+ <div class="dock-actions">
+  <button id="btn-undo" class="dock-ad" style="display:none" aria-label="Отмена хода за просмотр рекламы">
+   <b data-i="undo_move">Отмена хода</b><span data-i="ad_note">(за просмотр рекламы)</span>
+  </button>
+  <div class="boom-grp" id="boom-grp">
+   <span id="boomdots" class="boom-dots" title="Три съедения подряд дают заряд БУМ">○○○</span>
+   <button id="btn-boom" class="dock-boom" disabled data-i="boom">БУМ</button>
+   <div id="boom-tip" class="v032-boom-tip" role="dialog" aria-live="polite" style="display:none">
+    <div class="bt-title" data-i="boom_first_title">БУМ</div>
+    <div class="bt-text" id="boom-tip-text" data-i="boom_first_text">Заряжается за 3 съедения подряд. Сейчас 1/3. Когда накопится — выбери свою фишку, потом чужую на одной линии.</div>
+    <button type="button" id="boom-tip-ok" class="primary" data-i="ok">Понятно</button>
+   </div>
+  </div>
+  <div class="glove-grp" id="glove-grp">
+   <button id="btn-glove" class="dock-glove" disabled title="Хрустальная перчатка">
+    <img class="glove-ico" src="img/ui/glove.svg" alt=""><b id="glove-count">0/3</b>
+   </button>
+   <span id="rps-badge" class="rps-badge" hidden></span>
+   <div id="glove-tip" class="v032-boom-tip glove-tip" role="dialog" aria-live="polite" style="display:none">
+    <div class="bt-title" data-i="glove_title">Хрустальная перчатка</div>
+    <div class="bt-text" data-i="glove_text">Выбери тип перчатки — и поставь её на любое пустое место. Одна перчатка за игру.</div>
+    <div class="glove-types">
+     <button type="button" class="glove-type" data-glove-type="1" title="Камень"><span class="gt-ico" data-type="1"></span></button>
+     <button type="button" class="glove-type" data-glove-type="2" title="Ножницы"><span class="gt-ico" data-type="2"></span></button>
+     <button type="button" class="glove-type" data-glove-type="3" title="Бумага"><span class="gt-ico" data-type="3"></span></button>
+    </div>
+   </div>
+  </div>
+  <button id="btn-stop" class="primary dock-stop" style="display:none">✓ <span data-i="stop">Завершить ход</span></button>
+ </div>
+</div>
+
+<div id="captured-panel" class="cap-pop" aria-label="Захваченные плитки" aria-hidden="true">
+ <div class="cap-sheet-top"><span data-i="cap_sheet_title">Захваченные плитки</span></div>
+ <div class="captured-block player">
+  <div class="captured-head"><span data-i="trophy_you">Ваши</span><b id="captured-alchemist-count">0</b></div>
+  <div class="captured-list" id="captured-alchemist-list"></div>
+ </div>
+ <div class="captured-block ai">
+  <div class="captured-head"><span data-i="trophy_genie">Джинна</span><b id="captured-genie-count">0</b></div>
+  <div class="captured-list" id="captured-genie-list"></div>
+ </div>
+</div>
+
+<div id="portraits" style="display:none">
+ <div class="portrait left" id="port-player"><svg width="72" height="92" viewBox="0 0 100 130"><path d="M50 8 a20 20 0 0 1 20 20 v10 H30 V28 a20 20 0 0 1 20-20z" fill="#2a7d4f"/><path d="M38 52 h24 l8 34 a10 10 0 0 1 -10 12 H40 a10 10 0 0 1 -10-12z" fill="#3ddc84" opacity=".85"/></svg><div class="pbadge" data-i="alchemist">Алхимик</div></div>
+ <div class="portrait right" id="port-ai"><svg width="72" height="92" viewBox="0 0 100 130"><path d="M50 6 c18 10 22 24 14 38 c14 4 16 18 6 26 c12 8 8 24-4 28 c-14 5-30-2-34-16 c-12-4-14-20-4-27 c-10-10-6-26 6-31 c0-10 6-16 16-18z" fill="#e8c56a" opacity=".8"/></svg><div class="pbadge" data-i="genie">Джинн</div></div>
+</div>
+<div id="minimap"><canvas id="mmc" width="216" height="216"></canvas><div id="mm-threat"></div></div>
+<div id="hint" class="goal-mode" aria-live="polite" style="display:none">
+ <span class="goal-ico">🎯</span>
+ <span class="goal-text" id="goal-text" data-i="goal_text">Захвати Башню Джинна. Подведи плитку «Камень»</span>
+</div>
+<div id="rps-reward-toast" class="v032-toast" aria-live="polite" style="display:none">+1 заряд БУМ</div>
+<div class="controls" id="controls" style="display:none"><button id="rot-l" title="Повернуть влево" aria-label="Повернуть влево">⟲</button><button id="rot-r" title="Повернуть вправо" aria-label="Повернуть вправо">⟳</button><button id="tilt-u" title="Наклон вверх" aria-label="Наклон вверх">⟰</button><button id="tilt-d" title="Наклон вниз" aria-label="Наклон вниз">⟱</button></div>
+
+<div id="coach-board-anchor" class="v032-board-anchor" aria-hidden="true"></div>
+<div id="coach-spotlight" class="v032-spotlight" aria-hidden="true" style="display:none"></div>
+<div id="coach" role="dialog" aria-live="polite">
+ <div class="coach-top">
+  <div class="v032-coach-dots" id="coach-dots" aria-hidden="true"></div>
+  <div class="cst" id="coach-step" style="display:none">ШАГ 1 ИЗ 7</div>
+  <button type="button" id="coach-exit" class="coach-skip" data-i="coach_exit">Пропустить обучение</button>
+ </div>
+ <div class="ctt" id="coach-title"></div>
+ <div id="rules-visual" class="rules-visual" style="display:none"></div>
+ <div class="ctx" id="coach-text"></div>
+ <div class="coach-actions">
+  <button type="button" id="coach-menu" style="display:none" data-i="menuBtn">В меню</button>
+  <button type="button" id="coach-next" class="primary" data-i="coach_next">Дальше</button>
+ </div>
+</div>
+
+<canvas id="tut-dim" aria-hidden="true" style="display:none"></canvas>
+<div id="tut-panel" role="dialog" aria-live="polite" style="display:none">
+ <div class="tut-top"><span class="tut-step" id="tut-step">ШАГ 1 ИЗ 4</span><button type="button" id="tut-skip" class="tut-skip">Выйти</button></div>
+ <div class="tut-text" id="tut-text"></div>
+ <div class="tut-actions" id="tut-actions" style="display:none">
+  <button type="button" class="primary" id="tut-repeat">Повторить?</button>
+  <button type="button" id="tut-menu">Вернуться в меню</button>
+ </div>
+</div>
+<div id="ftext"></div><div id="fx3d"></div><div id="capfx"><div id="cap-ring"></div><div id="cap-flag" aria-hidden="true"><svg viewBox="0 0 64 84" width="100%" height="100%" focusable="false">
+ <defs>
+  <linearGradient id="cf-cloth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".62" stop-color="#f2f6ff"/><stop offset="1" stop-color="#cdd8ea"/></linearGradient>
+  <linearGradient id="cf-pole" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#cfd9ea"/><stop offset=".75" stop-color="#9dabc4"/><stop offset="1" stop-color="#7788a6"/></linearGradient>
+  <radialGradient id="cf-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="rgba(255,255,255,.55)"/><stop offset="1" stop-color="rgba(255,255,255,0)"/></radialGradient>
+ </defs>
+ <ellipse cx="22" cy="20" rx="26" ry="20" fill="url(#cf-glow)"/>
+ <circle cx="12" cy="6" r="4.6" fill="#ffe9a8" stroke="#8a6a24" stroke-width="1.3"/>
+ <rect x="9.3" y="8" width="5.4" height="72" rx="2.7" fill="url(#cf-pole)"/>
+ <g class="cf-cloth">
+  <path d="M14.6 11.2 C 27 6.2, 41 15.6, 59 10.2 L59 34.6 C 41 40, 27 30.6, 14.6 35.2 Z" fill="url(#cf-cloth)" stroke="#a7b4cc" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M23 12.6 C 31 17.6, 31 27.4, 23 33" fill="none" stroke="#c6d0e0" stroke-width="1.15" opacity=".95"/>
+  <path d="M38 14.2 C 46 19, 46 26, 38 31" fill="none" stroke="#c6d0e0" stroke-width="1.15" opacity=".8"/>
+ </g>
+</svg></div><div id="cap-label"></div></div><div id="flashfx"></div><div id="lbl-tp" class="tlbl"></div><div id="lbl-ta" class="tlbl"></div><div id="ring-tp" class="tw-ring"></div><div id="ring-ta" class="tw-ring"></div><div id="tw-flash" class="tw-flash"></div>
+
+<!-- §1.A Main Menu (#scr-start) -->
+<div class="screen on" id="scr-start"><div class="card start-card">
+ <div class="logo"><img src="img/ui/rps-logo.png" alt="Камень-ножницы-бумага" width="112" height="112"></div>
+ <h1 id="app-title">КАМЕНЬ-НОЖНИЦЫ-<span class="gold">БУМ!</span></h1>
+ <div class="sub-pill" data-i="appSub">Алхимик против Джина</div>
+ <div class="cta-stack">
+  <button class="primary cta-main" id="b-continue" style="display:none">▶ <span data-i="cont">Продолжить</span></button>
+  <button class="primary cta-main" id="b-play">▶ <span data-i="play">Играть</span></button>
+  <button type="button" class="primary cta-main" id="b-hs"><img class="ico menu-ico" src="img/ui/people.svg" alt=""><span data-i="hs_menu_btn">Играть вдвоём · хот-сит</span></button>
+  <button type="button" class="primary cta-main" id="b-mp" data-i="mp_menu_btn">МУЛЬТИПЛЕЕР</button>
+ </div>
+ <div class="menu-grid">
+  <button id="b-how" class="sec-btn"><img class="ico menu-ico" src="img/ui/book.svg" alt=""><span data-i="how">Как играть</span></button>
+  <button id="b-train" class="sec-btn"><img class="ico menu-ico" src="img/ui/cap.svg" alt=""><span data-i="train">Обучение</span></button>
+  <button id="rps-play" class="sec-btn"><img class="ico menu-ico" src="img/ui/mouth.svg" alt=""><span data-i="rps_menu_btn">Цу-е-фа</span><span id="rps-menu-badge" class="menu-fc-badge" style="display:none"></span></button>
+  <button id="b-set" class="sec-btn"><img class="ico" src="img/ui/gear.svg" alt=""><span data-i="settings">Настройки</span></button>
+  <button id="b-hof" class="sec-btn hof-btn"><img class="ico menu-ico" src="img/ui/trophy.svg" alt=""><span data-i="hof_menu_btn">Зал славы</span></button>
+ </div>
+ <div class="best-footer" id="best-line">v0.52</div>
+</div></div>
+
+<!-- §1.B Mode & Column Selection (#scr-mode) -->
+<div class="screen" id="scr-mode"><div class="card mode-card">
+ <div class="scr-head">
+  <button type="button" class="icon-back" id="b-mode-back" aria-label="Назад">←</button>
+  <h2 data-i="choose_mode_title">Выбери режим</h2>
+  <span class="scr-head-sp"></span>
+ </div>
+ <div id="mode-buttons" class="mode-cards">
+  <button type="button" class="mode-big-card" data-mode-choice="flat">
+   <div class="mode-card-ico"><svg viewBox="0 0 64 64" width="54" height="54"><rect x="10" y="10" width="44" height="44" rx="6" fill="rgba(232,197,106,.16)" stroke="#e8c56a" stroke-width="2.5"/><path d="M24.6 10v44M39.3 10v44M10 24.6h44M10 39.3h44" stroke="rgba(255,255,255,.45)" stroke-width="1.6"/></svg></div>
+   <div>
+    <span class="mode-name" data-i="mode_flat_btn">Доска 6×6</span>
+    <span class="mode-sel-dot" data-i="mode_picked">● выбрано</span>
+   </div>
+  </button>
+  <button type="button" class="mode-big-card active" data-mode-choice="sandwich">
+   <div class="mode-card-ico"><svg viewBox="0 0 64 64" width="54" height="54"><polygon points="32,6 56,18 56,46 32,58 8,46 8,18" fill="rgba(61,220,132,.18)" stroke="#3ddc84" stroke-width="2.5"/><polyline points="8,18 32,30 56,18" fill="none" stroke="#e8c56a" stroke-width="2.2"/><line x1="32" y1="30" x2="32" y2="58" stroke="#e8c56a" stroke-width="2.2"/></svg></div>
+   <div>
+    <span class="mode-name" data-i="mode_sandwich_btn">Башня 3D</span>
+    <span class="mode-sel-dot" data-i="mode_picked">● выбрано</span>
+   </div>
+  </button>
+ </div>
+ <div id="columns-panel">
+  <div class="col-title" data-i="columns">Уровень джина</div>
+  <div id="layer-btns" class="col-chips"></div>
+  <div class="col-hint" data-i="columnsHint">Побеждай, чтобы открывать новые уровни.</div>
+ </div>
+ <div id="mode-note" style="display:none"></div><span id="mode-name" style="display:none"></span>
+ <button type="button" class="primary cta-main" id="b-start-game">▶ <span data-i="start_game">Начать</span></button>
+</div></div>
+
+<!-- v0.52 · §Зал славы -->
+<div class="screen" id="scr-hof"><div class="card hof-card">
+ <div class="scr-head">
+  <span class="scr-head-sp"></span>
+  <h2 data-i="hof_title">Зал славы</h2>
+  <span class="scr-head-sp"></span>
+ </div>
+ <div class="hof-sub" data-i="hof_sub">Топ-5 рекордов в каждом одиночном режиме</div>
+ <div class="hof-tabs" role="tablist">
+  <button type="button" class="hof-tab on" id="hof-tab-flat" data-hof-mode="flat" role="tab">
+   <svg viewBox="0 0 64 64" width="20" height="20" aria-hidden="true"><rect x="12" y="12" width="40" height="40" rx="6" fill="none" stroke="currentColor" stroke-width="4"/></svg>
+   <span data-i="mode_flat_btn">Доска 6×6</span>
+  </button>
+  <button type="button" class="hof-tab" id="hof-tab-sandwich" data-hof-mode="sandwich" role="tab">
+   <svg viewBox="0 0 64 64" width="20" height="20" aria-hidden="true"><polygon points="32,8 54,19 54,45 32,56 10,45 10,19" fill="none" stroke="currentColor" stroke-width="4"/></svg>
+   <span data-i="mode_sandwich_btn">Башня 3D</span>
+  </button>
+ </div>
+ <ol class="hof-list" id="hof-list"></ol>
+ <div class="hof-empty" id="hof-empty" data-i="hof_empty" style="display:none">Пока нет рекордов — выиграй первую партию!</div>
+ <div class="hof-total"><span data-i="hof_total">Всего очков</span>: <b id="hof-total-val">0</b></div>
+</div></div>
+
+<div class="screen" id="scr-help"><div class="card help-card">
+ <h2 data-i="how">Как играть</h2>
+ <div id="help-blocks" class="help-blocks"></div>
+ <div class="credits" id="help-credits"></div>
+ <div class="row"><button class="primary" id="help-back" data-i="ok">OK</button></div>
+</div></div>
+
+<!-- §1.C Ro-sham-bo Select (#scr-rps-select) -->
+<div class="screen" id="scr-rps-select"><div class="card">
+ <h2 data-i="rps_title">🎴 Цу-е-фа с Джинном</h2>
+ <p class="rps-reward v032-rps-reward" data-i="rps_reward">Хрустальную перчатку можно использовать в игре — выбирай любой тип перчатки и выставляй на пустую клетку. Но не больше одного раза за игру</p>
+ <p class="narr" data-i="rps_pick">Выбери соперника. 20 побед = 1 хрустальная перчатка <i class="fc-ico" aria-hidden="true"></i>. На складе три слота.</p>
+ <div class="rps-select-prog">
+  <div class="rps-row"><span data-i="rps_progress">До перчатки</span><b id="rps-prog">0/20</b></div>
+  <div class="rps-bar"><i id="rps-bar"></i></div>
+  <div class="rps-row" style="margin-top:8px;margin-bottom:0"><span data-i="rps_store">Перчатки</span><span style="display:inline-flex;align-items:center;gap:8px"><b id="rps-store"><i class="fc-ico" aria-hidden="true"></i> 0</b><button id="rps-open" style="padding:4px 10px;font-size:12px" data-i="rps_store_btn">Открыть</button></span></div>
+ </div>
+ <div id="rps-opponents">
+  <div class="rps-op"><div class="oe" data-genie="2">🐣</div><h3 data-i="rps_o1">Новичок</h3><p class="small" data-i="rps_o1d"></p><button class="primary" data-rps-opp="novice" data-i="rps_play">Сыграть</button></div>
+  <div class="rps-op"><div class="oe" data-genie="5">🧑‍🎓</div><h3 data-i="rps_o2">Ученик</h3><p class="small" data-i="rps_o2d"></p><button class="primary" data-rps-opp="student" data-i="rps_play">Сыграть</button></div>
+  <div class="rps-op"><div class="oe" data-genie="8">🧙</div><h3 data-i="rps_o3">Стратег</h3><p class="small" data-i="rps_o3d"></p><button class="primary" data-rps-opp="strategist" data-i="rps_play">Сыграть</button></div>
+ </div>
+</div></div>
+
+<!-- §2.8 Ro-sham-bo Duel (#scr-rps-round) -->
+<div class="screen" id="scr-rps-round"><div class="card rps-card">
+ <div class="rps-top">
+  <b id="rps-charges" title="Хрустальные перчатки: побеждай, чтобы получать"><i class="fc-ico" aria-hidden="true"></i> ×0</b>
+  <span class="rps-round"><span class="rps-roundlbl" data-i="rps_round">Раунд</span> <b id="rps-rnum">1</b></span>
+   </div>
+ <div class="rps-score-grid" aria-live="polite">
+  <div class="rps-sc-col you"><span class="rps-sc-lbl" data-i="you">ВЫ</span><b class="p" id="rps-w">0</b></div>
+  <div class="rps-sc-mid"><span class="rps-dash">—</span><div class="rps-drawline"><span data-i="rps_draw">Ничьи</span>: <b id="rps-d">0</b></div></div>
+  <div class="rps-sc-col ai"><span class="rps-sc-lbl" data-i="genie">ДЖИНН</span><b class="a" id="rps-l">0</b></div>
+ </div>
+ <p class="rps-reward v032-rps-reward v032-rps-reward--round" data-i="rps_reward">Хрустальную перчатку можно использовать в игре — выбирай любой тип перчатки и выставляй на пустую клетку. Но не больше одного раза за игру</p>
+ <div class="rps-goal">
+  <div class="rps-GoalRow"><span class="rps-goal-lbl"><i class="fc-ico" aria-hidden="true"></i><span data-i="rps_goal">До перчатки</span></span><b id="rps-goal-val">0 / 20</b></div>
+  <div class="rps-goal-bar"><i id="rps-bar2"></i></div>
+ </div>
+ <div class="rps-head">
+  <div class="rps-who"><div class="rps-portrait" id="rps-port-p"></div><div class="rps-name" data-i="alchemist"><span>Алхимик</span></div></div>
+  <div class="rps-center"><div class="rps-count" id="rps-count"></div></div>
+  <div class="rps-who"><div class="rps-portrait" id="rps-port-a"></div><div class="rps-name" data-i="genie"><span>Джинн</span></div></div>
+ </div>
+ <div class="rps-hands" id="rps-arms">
+  <div class="rps-arm p still" id="rps-arm-p"><div class="rps-rot"><div class="rps-glove" id="rps-hand-p"></div></div><div class="rps-burst" id="rps-burst-p"></div></div>
+  <div class="rps-arm a still" id="rps-arm-a"><div class="rps-rot"><div class="rps-glove" id="rps-hand-a"></div></div><div class="rps-burst" id="rps-burst-a"></div></div>
+ </div>
+ <div id="rps-res-line" aria-live="polite"></div>
+ <div id="rps-taunt"></div>
+ <div class="rps-choices" id="rps-choices">
+  <button class="rps-btn" id="rps-m1" data-move="1" aria-label="Камень"><span class="rps-chip" data-move="1"></span><span class="rps-btn-lbl" data-i="rps_m1">Камень</span></button>
+  <button class="rps-btn" id="rps-m2" data-move="2" aria-label="Ножницы"><span class="rps-chip" data-move="2"></span><span class="rps-btn-lbl" data-i="rps_m2">Ножницы</span></button>
+  <button class="rps-btn" id="rps-m3" data-move="3" aria-label="Бумага"><span class="rps-chip" data-move="3"></span><span class="rps-btn-lbl" data-i="rps_m3">Бумага</span></button>
+ </div>
+ <p class="small rps-hint" data-i="rps_pickhint">Выбери жест до конца отсчёта</p>
+ <button id="rps-exit" class="rps-exit-sec" data-i="rps_exit">Выйти</button>
+</div></div>
+
+<div class="screen" id="scr-rps-storage"><div class="card">
+ <h2 data-i="rps_storage"><i class="fc-ico" aria-hidden="true"></i> Хлопушки</h2>
+ <p class="rps-reward v032-rps-reward" data-i="rps_reward">Хрустальную перчатку можно использовать в игре — выбирай любой тип перчатки и выставляй на пустую клетку. Но не больше одного раза за игру</p>
+ <p id="rps-storage-count" data-i="rps_empty">Пока пусто. Победи Джинна!</p>
+ <div id="rps-grid"></div>
+ <div class="rps-bar"><i id="rps-bar3"></i></div>
+ <div class="rps-storage-goal"><i class="fc-ico" aria-hidden="true"></i><span data-i="rps_progress">До перчатки</span><b id="rps-prog3">0 / 20</b></div>
+ <div class="row"><button class="primary" id="rps-back2" data-i="rps_back">← Назад</button></div>
+</div></div>
+
+<div class="overlay" id="ov-end"><div class="card"><img id="end-badge" alt=""><h2 id="end-title" data-i="end_title_idle">УРОВЕНЬ ПРОЙДЕН</h2><p id="end-text" class="narr"></p><p class="big" id="end-score"></p><div style="background:rgba(255,255,255,.12);border-radius:99px;height:14px;overflow:hidden;margin:10px 0"><div id="end-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#3ddc84,#e8c56a)"></div></div><p class="hof-record-note" id="end-record" style="display:none"></p><div class="row"><button class="primary" id="end-next" data-i="nextCol">Следующая колонна</button><button id="end-retry" data-i="again">Ещё раз</button><button id="end-menu" data-i="menuBtn">В меню</button></div>
+<button id="end-rescue" class="ad-cta" style="display:none"><b data-i="rescue_tower">Спасение башни</b><span data-i="ad_note">(за просмотр рекламы)</span></button>
+<p class="small" id="rps-end-txt"></p>
+<div class="row"><button id="rps-bonus" data-i="rps_bonus">🎴 Бонусный раунд с Джинном</button></div></div></div>
+
+<div class="overlay" id="ov-statue"><div class="card"><h2 id="statue-title" data-i="statue">Статуя</h2><div id="statue-big" style="display:grid;place-items:center;margin:8px 0"></div><p class="narr" id="statue-text"></p><div style="background:rgba(255,255,255,.12);border-radius:99px;height:14px;overflow:hidden"><div id="statue-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#3ddc84,#e8c56a)"></div></div><div class="row"><button class="primary" id="statue-close" data-i="ok">OK</button></div></div></div>
+
+<div class="overlay" id="ov-pause"><div class="card settings-card"><h2 data-i="settings">Настройки</h2><div class="settings-body">
+<label class="tower-cycle-row"><span data-i="tower_cycle_label">Ходов до смены типа башни</span><span class="tower-cycle-control"><input type="range" id="set-tower-cycle" min="1" max="10" step="1" value="6"><output id="set-tower-cycle-value">6</output></span></label>
+<div class="pool-row" id="set-pool-row">
+ <span class="pool-lbl" data-i="tower_pool_label">На какие типы меняется башня</span>
+ <div class="pool-btns" role="group" aria-label="Смена типа башни">
+  <button type="button" data-pool="swap2" class="cur" aria-pressed="true" data-i="tower_pool_2">На 2 оставшихся</button>
+  <button type="button" data-pool="any3" aria-pressed="false" data-i="tower_pool_3">На любой из 3</button>
+ </div>
+</div>
+<label><span><span data-i="set_mm">Мини-карта</span></span><input type="checkbox" id="set-mm"></label>
+<div class="v032-adv-body" id="set-advanced">
+  <label><span><span data-i="set_orbit">Авто-облёт камеры</span></span><input type="checkbox" id="set-orbit" checked></label>
+  <label><span><span data-i="set_rotate">Авто-поворот</span></span><input type="checkbox" id="set-rotate" checked></label>
+ </div>
+</div>
+<div class="row settings-row"><button class="primary" id="pause-close-menu" data-i="ok">Понятно</button></div>
+</div></div>
+
+<!-- v0.41: выход из партии по кнопке «Назад» -->
+<div class="overlay" id="ov-exit"><div class="card exit-card"><h2 data-i="exit_title">Партия</h2><p class="narr" data-i="exit_q">Что делаем дальше?</p>
+<div class="exit-actions"><button class="primary" id="exit-resume" data-i="resume">Продолжить</button><button id="exit-restart" data-i="restart">Заново</button><button id="exit-menu" data-i="menuBtn">В меню</button></div></div></div>
+<div id="glfail" style="display:none;position:fixed;inset:0;place-items:center;z-index:99"><div class="card" data-i="glfail">WebGL недоступен. Обнови браузер.</div></div>
+
+<script src="js/vk-bridge.min.js"></script>
+<script src="js/vk-platform.js"></script>
+<script src="js/gl-pre.js"></script>
+<script src="js/game.js"></script>
+<script src="js/multiplayer.js"></script>
+<script src="js/ads.js"></script>
+<script src="js/render-guard.js"></script>
+<script src="js/hotseat.js"></script>
+<script src="js/app.js"></script></body>
+</html>

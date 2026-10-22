@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-52 -52 104 104" width="104" height="104">
+<defs>
+ <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#fff3c4"/><stop offset=".42" stop-color="#ffdc7a"/>
+  <stop offset=".72" stop-color="#e8b845"/><stop offset="1" stop-color="#a97c18"/>
+ </linearGradient>
+ <radialGradient id="g2" cx=".36" cy=".3" r=".85">
+  <stop offset="0" stop-color="#fff8dd"/><stop offset=".55" stop-color="#f2cd68"/>
+  <stop offset="1" stop-color="#c1901f"/>
+ </radialGradient>
+ <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+  <feDropShadow dx="0" dy="2.5" stdDeviation="2.2" flood-color="#20180a" flood-opacity=".55"/>
+ </filter>
+</defs>
+<g filter="url(#sh)">
+ <path d="M 45.95,2.17 L 45.43,7.20 L 33.06,7.94 L 28.99,17.76 L 37.21,27.04 L 34.02,30.96 L 30.96,34.02 L 27.04,37.21 L 17.76,28.99 L 7.94,33.06 L 7.20,45.43 L 2.17,45.95 L -2.17,45.95 L -7.20,45.43 L -7.94,33.06 L -17.76,28.99 L -27.04,37.21 L -30.96,34.02 L -34.02,30.96 L -37.21,27.04 L -28.99,17.76 L -33.06,7.94 L -45.43,7.20 L -45.95,2.17 L -45.95,-2.17 L -45.43,-7.20 L -33.06,-7.94 L -28.99,-17.76 L -37.21,-27.04 L -34.02,-30.96 L -30.96,-34.02 L -27.04,-37.21 L -17.76,-28.99 L -7.94,-33.06 L -7.20,-45.43 L -2.17,-45.95 L 2.17,-45.95 L 7.20,-45.43 L 7.94,-33.06 L 17.76,-28.99 L 27.04,-37.21 L 30.96,-34.02 L 34.02,-30.96 L 37.21,-27.04 L 28.99,-17.76 L 33.06,-7.94 L 45.43,-7.20 L 45.95,-2.17 Z" fill="url(#g1)" stroke="#7d5a0e" stroke-width="2.4" stroke-linejoin="round"/>
+ <circle r="22" fill="url(#g2)" stroke="#7d5a0e" stroke-width="2.2"/>
+ <circle r="12" fill="#231a05" opacity=".92"/>
+ <circle r="12" fill="none" stroke="#ffe9a3" stroke-width="1.6" opacity=".85"/>
+ <path d="M-14 -26 A 22 22 0 0 1 12 -30" fill="none" stroke="#fffbe6" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+</g>
+</svg>
